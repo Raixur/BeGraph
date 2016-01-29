@@ -80,16 +80,17 @@ namespace BeGraph {
 
 		private void redraw() {
 			Graphics gr = graphBox.CreateGraphics();
-			gr.Clear(Color.WhiteSmoke);
+			gr.Clear(Color.White);
 			g.draw(graphBox);
 			gr.Dispose();
 		}
 
 		private Vertex generateVert(Point p) {
 			if (haveSpace(p)) {
-				string name;
-				if (InputBox(out name) == DialogResult.OK) {
-					Vertex v = new Vertex(name, p);
+				InputDialog.InputDialog id = new InputDialog.InputDialog("Enter name of a vertex", "Vertex generation");
+				DialogResult dResult = id.ShowDialog(this);
+				if (dResult == DialogResult.OK) {
+					Vertex v = new Vertex(id.getInput(), p);
 					v.draw(graphBox);
 					g += v;
 					redraw();
