@@ -34,14 +34,32 @@ namespace BeGraph {
 			this.saveToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.openToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
 			this.exitToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+			this.toolStripButton1 = new System.Windows.Forms.ToolStripButton();
 			((System.ComponentModel.ISupportInitialize)(this.graphBox)).BeginInit();
 			this.toolStrip1.SuspendLayout();
 			this.SuspendLayout();
 			// 
+			// graphBox
+			// 
+			this.graphBox.BackColor = System.Drawing.Color.White;
+			this.graphBox.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
+			this.graphBox.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+			this.graphBox.Location = new System.Drawing.Point(12, 25);
+			this.graphBox.Name = "graphBox";
+			this.graphBox.Size = new System.Drawing.Size(100, 50);
+			this.graphBox.SizeMode = System.Windows.Forms.PictureBoxSizeMode.AutoSize;
+			this.graphBox.TabIndex = 1;
+			this.graphBox.TabStop = false;
+			this.graphBox.Click += new System.EventHandler(this.graphBox_Click);
+			this.graphBox.DoubleClick += new System.EventHandler(this.graphBox_DoubleClick);
+			this.graphBox.MouseDown += new System.Windows.Forms.MouseEventHandler(this.graphBox_MouseDown);
+			this.graphBox.MouseUp += new System.Windows.Forms.MouseEventHandler(this.graphBox_MouseUp);
+			// 
 			// toolStrip1
 			// 
 			this.toolStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.toolStripDropDownButton1});
+            this.toolStripDropDownButton1,
+            this.toolStripButton1});
 			this.toolStrip1.Location = new System.Drawing.Point(0, 0);
 			this.toolStrip1.Name = "toolStrip1";
 			this.toolStrip1.Size = new System.Drawing.Size(587, 25);
@@ -85,21 +103,14 @@ namespace BeGraph {
 			this.exitToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
 			this.exitToolStripMenuItem.Text = "Exit";
 			// 
-			// graphBox
+			// toolStripButton1
 			// 
-			this.graphBox.BackColor = System.Drawing.Color.WhiteSmoke;
-			this.graphBox.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
-			this.graphBox.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-			this.graphBox.Location = new System.Drawing.Point(12, toolStrip1.Size.Height);
-			this.graphBox.Name = "graphBox";
-			this.graphBox.Size = new System.Drawing.Size(100, 50);
-			this.graphBox.SizeMode = System.Windows.Forms.PictureBoxSizeMode.AutoSize;
-			this.graphBox.TabIndex = 1;
-			this.graphBox.TabStop = false;
-			this.graphBox.Click += new System.EventHandler(this.graphBox_Click);
-			this.graphBox.DoubleClick += new System.EventHandler(this.graphBox_DoubleClick);
-			this.graphBox.MouseDown += new System.Windows.Forms.MouseEventHandler(this.graphBox_MouseDown);
-			this.graphBox.MouseUp += new System.Windows.Forms.MouseEventHandler(this.graphBox_MouseUp);
+			this.toolStripButton1.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+			this.toolStripButton1.Image = ((System.Drawing.Image)(resources.GetObject("toolStripButton1.Image")));
+			this.toolStripButton1.ImageTransparentColor = System.Drawing.Color.Magenta;
+			this.toolStripButton1.Name = "toolStripButton1";
+			this.toolStripButton1.Size = new System.Drawing.Size(23, 22);
+			this.toolStripButton1.Text = "toolStripButton1";
 			// 
 			// Form1
 			// 
@@ -132,6 +143,7 @@ namespace BeGraph {
 		private ToolStripMenuItem saveToolStripMenuItem;
 		private ToolStripMenuItem openToolStripMenuItem;
 		private ToolStripDropDownButton toolStripDropDownButton1;
+		private ToolStripButton toolStripButton1;
 	}
 }
 
