@@ -2,7 +2,7 @@
 
 namespace BeGraph
 {
-    class Graph:Figure {
+    class Graph : Figure {
         List<Vertex> vertexes;
         List<Edge> edges;
 
