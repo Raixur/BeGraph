@@ -23,18 +23,21 @@ namespace BeGraph {
 			this.WindowState = FormWindowState.Maximized;
 			this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.Sizable;
 			graphBox.Size = new System.Drawing.Size(this.Size.Width - 60, this.Size.Height - 80);
-			graphBox.Location = new Point(20, 20);
 		}
 
-		public static DialogResult InputBox(string title, string promptText, out string value) {
+		private void Form1_Resize(object sender, EventArgs e) {
+			redraw();
+		}
+
+		public static DialogResult InputBox(out string value) {
 			Form form = new Form();
 			Label label = new Label();
 			TextBox textBox = new TextBox();
 			Button buttonOk = new Button();
 			Button buttonCancel = new Button();
 
-			form.Text = title;
-			label.Text = promptText;
+			form.Text = "Vertex";
+			label.Text = "Enter name of the vertex";
 			textBox.Text = "";
 
 			buttonOk.Text = "OK";
@@ -42,7 +45,7 @@ namespace BeGraph {
 			buttonOk.DialogResult = DialogResult.OK;
 			buttonCancel.DialogResult = DialogResult.Cancel;
 
-			label.SetBounds(9, 20, 372, 13);
+			label.SetBounds(9, 15, 372, 13);
 			textBox.SetBounds(12, 36, 372, 20);
 			buttonOk.SetBounds(228, 72, 75, 23);
 			buttonCancel.SetBounds(309, 72, 75, 23);
@@ -85,7 +88,7 @@ namespace BeGraph {
 		private Vertex generateVert(Point p) {
 			if (haveSpace(p)) {
 				string name;
-				if (InputBox("Input", "Enter vertex name", out name) == DialogResult.OK) {
+				if (InputBox(out name) == DialogResult.OK) {
 					Vertex v = new Vertex(name, p);
 					v.draw(graphBox);
 					g += v;
@@ -143,7 +146,10 @@ namespace BeGraph {
 
 		}
 
+		private void toolStripDropDownButton1_Click(object sender, EventArgs e) {
 
+		}
 
+		
 	}
 }
