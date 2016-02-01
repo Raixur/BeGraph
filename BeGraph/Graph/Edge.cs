@@ -39,6 +39,7 @@ namespace BeGraph
 			Pen p = new Pen(Color.DarkBlue,2);
 
 			// Рисование линии между вершинам графа
+			gr.SmoothingMode = System.Drawing.Drawing2D.SmoothingMode.AntiAlias;
 			gr.DrawLine(p, fRad, sRad);
 
 			p.Dispose();
