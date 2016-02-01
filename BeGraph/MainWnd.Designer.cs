@@ -2,7 +2,7 @@
 using System.Windows.Forms;
 
 namespace BeGraph {
-	partial class Form1 {
+	partial class MainWnd {
 		/// <summary>
 		/// Обязательная переменная конструктора.
 		/// </summary>
@@ -26,8 +26,8 @@ namespace BeGraph {
 		/// содержимое этого метода с помощью редактора кода.
 		/// </summary>
 		private void InitializeComponent() {
-			System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
-			this.graphBox = new System.Windows.Forms.PictureBox();
+			System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainWnd));
+			this.graphBox = new BeGraph.GraphBox();
 			this.toolStrip1 = new System.Windows.Forms.ToolStrip();
 			this.toolStripDropDownButton1 = new System.Windows.Forms.ToolStripDropDownButton();
 			this.openToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -44,16 +44,11 @@ namespace BeGraph {
 			this.graphBox.BackColor = System.Drawing.Color.White;
 			this.graphBox.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
 			this.graphBox.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-			this.graphBox.Location = new System.Drawing.Point(12, 25);
+			this.graphBox.Location = new System.Drawing.Point(12, 28);
 			this.graphBox.Name = "graphBox";
-			this.graphBox.Size = new System.Drawing.Size(100, 50);
-			this.graphBox.SizeMode = System.Windows.Forms.PictureBoxSizeMode.AutoSize;
-			this.graphBox.TabIndex = 1;
+			this.graphBox.Size = new System.Drawing.Size(563, 421);
+			this.graphBox.TabIndex = 3;
 			this.graphBox.TabStop = false;
-			this.graphBox.Click += new System.EventHandler(this.graphBox_Click);
-			this.graphBox.DoubleClick += new System.EventHandler(this.graphBox_DoubleClick);
-			this.graphBox.MouseDown += new System.Windows.Forms.MouseEventHandler(this.graphBox_MouseDown);
-			this.graphBox.MouseUp += new System.Windows.Forms.MouseEventHandler(this.graphBox_MouseUp);
 			// 
 			// toolStrip1
 			// 
@@ -82,25 +77,25 @@ namespace BeGraph {
 			// openToolStripMenuItem
 			// 
 			this.openToolStripMenuItem.Name = "openToolStripMenuItem";
-			this.openToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+			this.openToolStripMenuItem.Size = new System.Drawing.Size(103, 22);
 			this.openToolStripMenuItem.Text = "New";
 			// 
 			// saveToolStripMenuItem
 			// 
 			this.saveToolStripMenuItem.Name = "saveToolStripMenuItem";
-			this.saveToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+			this.saveToolStripMenuItem.Size = new System.Drawing.Size(103, 22);
 			this.saveToolStripMenuItem.Text = "Save";
 			// 
 			// openToolStripMenuItem1
 			// 
 			this.openToolStripMenuItem1.Name = "openToolStripMenuItem1";
-			this.openToolStripMenuItem1.Size = new System.Drawing.Size(152, 22);
+			this.openToolStripMenuItem1.Size = new System.Drawing.Size(103, 22);
 			this.openToolStripMenuItem1.Text = "Open";
 			// 
 			// exitToolStripMenuItem
 			// 
 			this.exitToolStripMenuItem.Name = "exitToolStripMenuItem";
-			this.exitToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+			this.exitToolStripMenuItem.Size = new System.Drawing.Size(103, 22);
 			this.exitToolStripMenuItem.Text = "Exit";
 			// 
 			// toolStripButton1
@@ -117,10 +112,11 @@ namespace BeGraph {
 			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
 			this.BackColor = System.Drawing.SystemColors.Control;
-			this.ClientSize = new System.Drawing.Size(587, 361);
+			this.ClientSize = new System.Drawing.Size(587, 461);
 			this.Controls.Add(this.toolStrip1);
 			this.Controls.Add(this.graphBox);
 			this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
+			this.MinimumSize = new System.Drawing.Size(600, 500);
 			this.Name = "Form1";
 			this.Text = "BeGraph";
 			this.Load += new System.EventHandler(this.Form1_Load);
@@ -136,7 +132,7 @@ namespace BeGraph {
 
 		#endregion
 
-		private PictureBox graphBox;
+		private GraphBox graphBox;
 		private ToolStrip toolStrip1;
 		private ToolStripMenuItem exitToolStripMenuItem;
 		private ToolStripMenuItem openToolStripMenuItem1;

@@ -19,16 +19,18 @@ namespace BeGraph
 			return null;
 		}
 
-		public override void draw(System.Windows.Forms.PictureBox p) {
+		public override void draw(System.Drawing.Graphics gr) {
 			foreach (Vertex v in vertexes)
-				v.draw(p);
+				v.draw(gr);
 			foreach (Edge e in edges)
-				e.draw(p);
+				e.draw(gr);
 		}
 
 		public static Graph operator +(Graph g, Vertex v) {
-			if(!g.vertexes.Contains(v))
+			if (!g.vertexes.Contains(v)) {
 				g.vertexes.Add(v);
+				g.OnGraphChanged(new System.EventArgs());
+			}
             return g;
         }
 
@@ -37,8 +39,20 @@ namespace BeGraph
 				g.vertexes.Add(e.getFirst());
 			if (!g.vertexes.Contains(e.getSecond()))
 				g.vertexes.Add(e.getSecond());
-			g.edges.Add(e);
+			if (!g.edges.Contains(e)) {
+				g.edges.Add(e);
+				g.OnGraphChanged(new System.EventArgs());
+			}
             return g;
         }
-    }
+
+		protected virtual void OnGraphChanged(System.EventArgs e) {
+			System.EventHandler handler = GraphChanged;
+			if (handler != null)
+				handler(this, e);
+		}
+
+		public event System.EventHandler GraphChanged;
+
+	}
 }
