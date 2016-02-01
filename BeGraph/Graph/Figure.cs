@@ -10,6 +10,6 @@
         }
 
 
-		public abstract void draw(System.Windows.Forms.PictureBox pb);
+		public abstract void draw(System.Drawing.Graphics gr);
     }
 }

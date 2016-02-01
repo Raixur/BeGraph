@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Drawing;
-using System.Windows.Forms;
 
 namespace BeGraph{
 #pragma warning disable CS0659 // Тип переопределяет Object.Equals(object o), но не переопределяет Object.GetHashCode()
@@ -31,8 +30,7 @@ namespace BeGraph{
 			return name == v.name;
 		}
 
-		public override void draw(PictureBox pb) {
-			Graphics gr = pb.CreateGraphics();
+		public override void draw(Graphics gr) {
 			SolidBrush b = new SolidBrush(Color.Red);
 			Font f = new Font("Arial", 11);
 
@@ -42,7 +40,6 @@ namespace BeGraph{
 
 			f.Dispose();
 			b.Dispose();
-			gr.Dispose();
 		}
 
 		public static Edge operator +(Vertex v1, Vertex v2) {

@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Drawing;
-using System.Windows.Forms;
 
 namespace BeGraph
 {
@@ -28,7 +27,7 @@ namespace BeGraph
 			return second;
 		}
 
-		public override void draw(PictureBox pb) {
+		public override void draw(Graphics gr) {
 			// Висчитавание координат начала и конца вершины
 			double c = Math.Sqrt(Math.Pow(second.position.X - first.position.X, 2) + Math.Pow(second.position.Y - first.position.Y, 2));
 			double sin = (second.position.Y - first.position.Y) / c;
@@ -37,14 +36,12 @@ namespace BeGraph
 
 			Point fRad = new Point(first.position.X + (int)(cos * Vertex.r), first.position.Y + (int)(sin * Vertex.r));
 			Point sRad = new Point(second.position.X - (int)(cos * Vertex.r), second.position.Y - (int)(sin * Vertex.r));
-			Graphics gr = pb.CreateGraphics();
 			Pen p = new Pen(Color.DarkBlue,2);
 
 			// Рисование линии между вершинам графа
 			gr.DrawLine(p, fRad, sRad);
 
 			p.Dispose();
-			gr.Dispose();
 		}
 	}
 }
