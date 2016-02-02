@@ -3,6 +3,7 @@ using System.Drawing;
 
 namespace BeGraph
 {
+	[Serializable]
     class Edge:Figure{
 
 		Vertex first;

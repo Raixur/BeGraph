@@ -3,6 +3,7 @@ using System.Drawing;
 
 namespace BeGraph{
 #pragma warning disable CS0659 // Тип переопределяет Object.Equals(object o), но не переопределяет Object.GetHashCode()
+	[Serializable]
 	class Vertex : Figure {
 #pragma warning restore CS0659 // Тип переопределяет Object.Equals(object o), но не переопределяет Object.GetHashCode()
 		string name;

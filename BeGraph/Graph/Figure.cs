@@ -1,4 +1,8 @@
-﻿namespace BeGraph {
+﻿using System;
+
+
+namespace BeGraph {
+	[Serializable]
     abstract class Figure {
         public int id {
 			get; private set;
@@ -8,7 +12,6 @@
         public Figure() {
             id = nextID++;
         }
-
 
 		public abstract void draw(System.Drawing.Graphics gr);
     }
