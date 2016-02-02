@@ -27,7 +27,7 @@ namespace BeGraph {
 		/// </summary>
 		private void InitializeComponent() {
 			System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainWnd));
-			this.graphBox = new BeGraph.GraphBox();
+			//this.graphBox = new BeGraph.GraphBox();
 			this.toolStrip1 = new System.Windows.Forms.ToolStrip();
 			this.toolStripDropDownButton1 = new System.Windows.Forms.ToolStripDropDownButton();
 			this.openToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -35,20 +35,13 @@ namespace BeGraph {
 			this.openToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
 			this.exitToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.toolStripButton1 = new System.Windows.Forms.ToolStripButton();
-			((System.ComponentModel.ISupportInitialize)(this.graphBox)).BeginInit();
+			//((System.ComponentModel.ISupportInitialize)(this.graphBox)).BeginInit();
 			this.toolStrip1.SuspendLayout();
 			this.SuspendLayout();
 			// 
 			// graphBox
 			// 
-			this.graphBox.BackColor = System.Drawing.Color.White;
-			this.graphBox.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
-			this.graphBox.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-			this.graphBox.Location = new System.Drawing.Point(12, 28);
-			this.graphBox.Name = "graphBox";
-			this.graphBox.Size = new System.Drawing.Size(563, 421);
-			this.graphBox.TabIndex = 3;
-			this.graphBox.TabStop = false;
+
 			// 
 			// toolStrip1
 			// 
@@ -115,13 +108,13 @@ namespace BeGraph {
 			this.BackColor = System.Drawing.SystemColors.Control;
 			this.ClientSize = new System.Drawing.Size(587, 461);
 			this.Controls.Add(this.toolStrip1);
-			this.Controls.Add(this.graphBox);
+			//this.Controls.Add(this.graphBox);
 			this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
 			this.MinimumSize = new System.Drawing.Size(600, 500);
 			this.Name = "MainWnd";
 			this.Text = "BeGraph";
 			this.Load += new System.EventHandler(this.Form1_Load);
-			((System.ComponentModel.ISupportInitialize)(this.graphBox)).EndInit();
+			//((System.ComponentModel.ISupportInitialize)(this.graphBox)).EndInit();
 			this.toolStrip1.ResumeLayout(false);
 			this.toolStrip1.PerformLayout();
 			this.ResumeLayout(false);

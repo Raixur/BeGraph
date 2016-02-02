@@ -16,6 +16,16 @@ namespace BeGraph {
 
 		public GraphBox() {
 			g = new Graph();
+
+			this.BackColor = System.Drawing.Color.White;
+			this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
+			this.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+			this.Location = new System.Drawing.Point(12, 28);
+			this.Name = "graphBox";
+			this.Size = new System.Drawing.Size(563, 421);
+			this.TabIndex = 3;
+			this.TabStop = false;
+
 			// Binding event handlers to events.
 			MouseDown += new MouseEventHandler(pb_MouseDown);
 			MouseUp += new MouseEventHandler(pb_MouseUp);
