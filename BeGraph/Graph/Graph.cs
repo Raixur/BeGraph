@@ -1,14 +1,25 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
+using System.Runtime.Serialization;
+
 
 namespace BeGraph
 {
-    class Graph : Figure {
-        List<Vertex> vertexes;
-        List<Edge> edges;
+	[Serializable]
+	class Graph : Figure {
+        List<Vertex> vertexes = new List<Vertex>();
+        List<Edge> edges = new List<Edge>();
 
 		public Graph() {
-			vertexes = new List<Vertex>();
-			edges = new List<Edge>();
+		}
+
+		public Graph(Graph other) {
+			foreach (Vertex v in other.vertexes) {
+				this.vertexes.Add(v);
+			}
+			foreach(Edge e in other.edges) {
+				this.edges.Add(e);
+			}
 		}
 
 		public Vertex vertAt(System.Drawing.Point p) {

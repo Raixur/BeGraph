@@ -9,11 +9,13 @@ namespace BeGraph {
 	/// </summary>
 	class GraphBox : PictureBox {
 
-		private Graph g = new Graph();
+		public Graph g {
+			get; private set;
+		}
 		private Vertex last;
 
 		public GraphBox() {
-			
+			g = new Graph();
 			// Binding event handlers to events.
 			MouseDown += new MouseEventHandler(pb_MouseDown);
 			MouseUp += new MouseEventHandler(pb_MouseUp);
