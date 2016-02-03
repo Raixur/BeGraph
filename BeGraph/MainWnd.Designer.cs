@@ -27,21 +27,15 @@ namespace BeGraph {
 		/// </summary>
 		private void InitializeComponent() {
 			System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainWnd));
-			//this.graphBox = new BeGraph.GraphBox();
 			this.toolStrip1 = new System.Windows.Forms.ToolStrip();
 			this.toolStripDropDownButton1 = new System.Windows.Forms.ToolStripDropDownButton();
-			this.openToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+			this.newToolbarItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.saveToolbarItem = new System.Windows.Forms.ToolStripMenuItem();
-			this.openToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
-			this.exitToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+			this.openToolbarItem = new System.Windows.Forms.ToolStripMenuItem();
+			this.exitToolbarItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.toolStripButton1 = new System.Windows.Forms.ToolStripButton();
-			//((System.ComponentModel.ISupportInitialize)(this.graphBox)).BeginInit();
 			this.toolStrip1.SuspendLayout();
 			this.SuspendLayout();
-			// 
-			// graphBox
-			// 
-
 			// 
 			// toolStrip1
 			// 
@@ -58,20 +52,21 @@ namespace BeGraph {
 			// 
 			this.toolStripDropDownButton1.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
 			this.toolStripDropDownButton1.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.openToolStripMenuItem,
+            this.newToolbarItem,
             this.saveToolbarItem,
-            this.openToolStripMenuItem1,
-            this.exitToolStripMenuItem});
+            this.openToolbarItem,
+            this.exitToolbarItem});
 			this.toolStripDropDownButton1.Name = "toolStripDropDownButton1";
 			this.toolStripDropDownButton1.Size = new System.Drawing.Size(38, 22);
 			this.toolStripDropDownButton1.Text = "File";
 			this.toolStripDropDownButton1.Click += new System.EventHandler(this.toolStripDropDownButton1_Click);
 			// 
-			// openToolStripMenuItem
+			// newToolbarItem
 			// 
-			this.openToolStripMenuItem.Name = "openToolStripMenuItem";
-			this.openToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
-			this.openToolStripMenuItem.Text = "New";
+			this.newToolbarItem.Name = "newToolbarItem";
+			this.newToolbarItem.Size = new System.Drawing.Size(152, 22);
+			this.newToolbarItem.Text = "New";
+			this.newToolbarItem.Click += new System.EventHandler(this.newToolbarItem_Click);
 			// 
 			// saveToolbarItem
 			// 
@@ -80,17 +75,19 @@ namespace BeGraph {
 			this.saveToolbarItem.Text = "Save";
 			this.saveToolbarItem.Click += new System.EventHandler(this.saveToolbarItem_Click);
 			// 
-			// openToolStripMenuItem1
+			// openToolbarItem
 			// 
-			this.openToolStripMenuItem1.Name = "openToolStripMenuItem1";
-			this.openToolStripMenuItem1.Size = new System.Drawing.Size(152, 22);
-			this.openToolStripMenuItem1.Text = "Open";
+			this.openToolbarItem.Name = "openToolbarItem";
+			this.openToolbarItem.Size = new System.Drawing.Size(152, 22);
+			this.openToolbarItem.Text = "Open";
+			this.openToolbarItem.Click += new System.EventHandler(this.openToolbarItem_Click);
 			// 
-			// exitToolStripMenuItem
+			// exitToolbarItem
 			// 
-			this.exitToolStripMenuItem.Name = "exitToolStripMenuItem";
-			this.exitToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
-			this.exitToolStripMenuItem.Text = "Exit";
+			this.exitToolbarItem.Name = "exitToolbarItem";
+			this.exitToolbarItem.Size = new System.Drawing.Size(152, 22);
+			this.exitToolbarItem.Text = "Exit";
+			this.exitToolbarItem.Click += new System.EventHandler(this.exitToolbarItem_Click);
 			// 
 			// toolStripButton1
 			// 
@@ -108,13 +105,11 @@ namespace BeGraph {
 			this.BackColor = System.Drawing.SystemColors.Control;
 			this.ClientSize = new System.Drawing.Size(587, 461);
 			this.Controls.Add(this.toolStrip1);
-			//this.Controls.Add(this.graphBox);
 			this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
 			this.MinimumSize = new System.Drawing.Size(600, 500);
 			this.Name = "MainWnd";
 			this.Text = "BeGraph";
 			this.Load += new System.EventHandler(this.Form1_Load);
-			//((System.ComponentModel.ISupportInitialize)(this.graphBox)).EndInit();
 			this.toolStrip1.ResumeLayout(false);
 			this.toolStrip1.PerformLayout();
 			this.ResumeLayout(false);
@@ -128,10 +123,10 @@ namespace BeGraph {
 
 		private GraphBox graphBox;
 		private ToolStrip toolStrip1;
-		private ToolStripMenuItem exitToolStripMenuItem;
-		private ToolStripMenuItem openToolStripMenuItem1;
+		private ToolStripMenuItem exitToolbarItem;
+		private ToolStripMenuItem openToolbarItem;
 		private ToolStripMenuItem saveToolbarItem;
-		private ToolStripMenuItem openToolStripMenuItem;
+		private ToolStripMenuItem newToolbarItem;
 		private ToolStripDropDownButton toolStripDropDownButton1;
 		private ToolStripButton toolStripButton1;
 	}
