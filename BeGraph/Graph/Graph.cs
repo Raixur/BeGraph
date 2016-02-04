@@ -5,7 +5,6 @@ using System.Runtime.Serialization;
 
 namespace BeGraph
 {
-	[Serializable]
 	class Graph : Figure {
         List<Vertex> vertexes = new List<Vertex>();
         List<Edge> edges = new List<Edge>();
@@ -13,6 +12,7 @@ namespace BeGraph
 		public Graph() {
 		}
 
+		//Not used
 		public Graph(Graph other) {
 			foreach (Vertex v in other.vertexes) {
 				this.vertexes.Add(v);
@@ -35,6 +35,19 @@ namespace BeGraph
 				v.draw(gr);
 			foreach (Edge e in edges)
 				e.draw(gr);
+		}
+
+		public override string ToString() {
+			string s = "";
+			s += vertexes.Count + Environment.NewLine;
+			foreach (Vertex v in vertexes) {
+				s += v + Environment.NewLine;
+			}
+			s += edges.Count + Environment.NewLine;
+			foreach (Edge e in edges) {
+				s += e + Environment.NewLine;
+			}
+			return s;
 		}
 
 		public static Graph operator +(Graph g, Vertex v) {

@@ -3,11 +3,22 @@ using System.Drawing;
 
 namespace BeGraph{
 #pragma warning disable CS0659 // Тип переопределяет Object.Equals(object o), но не переопределяет Object.GetHashCode()
-	[Serializable]
 	class Vertex : Figure {
 #pragma warning restore CS0659 // Тип переопределяет Object.Equals(object o), но не переопределяет Object.GetHashCode()
 		string name;
-		public Point position;
+		private Point position;
+
+		public string Name {
+			get {
+				return name;
+			}
+		}
+
+		public Point Pos {
+			get {
+				return position;
+			}
+		}
 
 		public static readonly int r = 8;
 
@@ -22,6 +33,10 @@ namespace BeGraph{
 
 		public bool isInRange(Point p) {
 			return (Math.Pow(p.X - position.X, 2) + Math.Pow(p.Y - position.Y, 2) <= Math.Pow(4*r, 2));
+		}
+
+		public override string ToString() {
+			return name + "(" + position.X + ", " + position.Y + ")";
 		}
 
 		public override bool Equals(object obj) {

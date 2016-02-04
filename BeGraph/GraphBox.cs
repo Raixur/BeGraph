@@ -9,10 +9,18 @@ namespace BeGraph {
 	/// </summary>
 	class GraphBox : PictureBox {
 
-		public Graph g {
-			get; private set;
-		}
+		private Graph g;
 		private Vertex last;
+
+		public Graph G {
+			get {
+				return g;
+			}
+
+			set {
+				g = value;
+			}
+		}
 
 		public GraphBox() {
 			g = new Graph();
