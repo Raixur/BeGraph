@@ -23,7 +23,7 @@ namespace BeGraph {
 			if (saveDialog.ShowDialog() == DialogResult.OK) {
 				using (StreamWriter sw = new StreamWriter(saveDialog.OpenFile(), System.Text.Encoding.Unicode)) {
 					if (sw != null)
-						sw.WriteLine(graphBox.g);
+						sw.WriteLine(graphBox.G);
 				}
 			}
 		}
