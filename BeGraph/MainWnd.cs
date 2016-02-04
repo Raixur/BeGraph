@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Drawing;
 using System.IO;
 using System.Windows.Forms;
 
@@ -18,7 +19,11 @@ namespace BeGraph {
 		}
 
 		private void newToolbarItem_Click(object sender, EventArgs e) {
-			//TODO: implement
+			if (graphBox != null)
+				graphBox.Dispose();
+			graphBox = new GraphBox();
+			graphBox.Size = new Size(this.Size.Width - 40, this.Size.Height - 80);
+			this.Controls.Add(graphBox);
 		}
 
 		private void openToolbarItem_Click(object sender, EventArgs e) {
