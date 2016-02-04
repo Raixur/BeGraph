@@ -15,7 +15,17 @@ namespace BeGraph {
 		}
 
 		private void saveToolbarItem_Click(object sender, EventArgs e) {
-			//TODO: implement
+			//TODO: implement async
+			SaveFileDialog saveDialog = new SaveFileDialog();
+			saveDialog.Filter = "Graph files (*.g)|*.g";
+			saveDialog.RestoreDirectory = true;
+
+			if (saveDialog.ShowDialog() == DialogResult.OK) {
+				using (StreamWriter sw = new StreamWriter(saveDialog.OpenFile(), System.Text.Encoding.Unicode)) {
+					if (sw != null)
+						sw.WriteLine(graphBox.g);
+				}
+			}
 		}
 
 		private void newToolbarItem_Click(object sender, EventArgs e) {

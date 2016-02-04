@@ -3,7 +3,6 @@ using System.Drawing;
 
 namespace BeGraph
 {
-	[Serializable]
     class Edge:Figure{
 
 		Vertex first;
@@ -30,13 +29,13 @@ namespace BeGraph
 
 		public override void draw(Graphics gr) {
 			// Висчитавание координат начала и конца вершины
-			double c = Math.Sqrt(Math.Pow(second.position.X - first.position.X, 2) + Math.Pow(second.position.Y - first.position.Y, 2));
-			double sin = (second.position.Y - first.position.Y) / c;
-			double cos = (second.position.X - first.position.X) / c;
+			double c = Math.Sqrt(Math.Pow(second.Pos.X - first.Pos.X, 2) + Math.Pow(second.Pos.Y - first.Pos.Y, 2));
+			double sin = (second.Pos.Y - first.Pos.Y) / c;
+			double cos = (second.Pos.X - first.Pos.X) / c;
 
 
-			Point fRad = new Point(first.position.X + (int)(cos * Vertex.r), first.position.Y + (int)(sin * Vertex.r));
-			Point sRad = new Point(second.position.X - (int)(cos * Vertex.r), second.position.Y - (int)(sin * Vertex.r));
+			Point fRad = new Point(first.Pos.X + (int)(cos * Vertex.r), first.Pos.Y + (int)(sin * Vertex.r));
+			Point sRad = new Point(second.Pos.X - (int)(cos * Vertex.r), second.Pos.Y - (int)(sin * Vertex.r));
 			Pen p = new Pen(Color.DarkBlue,2);
 
 			// Рисование линии между вершинам графа

@@ -2,7 +2,6 @@
 
 
 namespace BeGraph {
-	[Serializable]
     abstract class Figure {
         public int id {
 			get; private set;
