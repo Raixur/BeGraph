@@ -27,39 +27,36 @@ namespace BeGraph {
 		/// </summary>
 		private void InitializeComponent() {
 			System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainWnd));
-			this.toolStrip1 = new System.Windows.Forms.ToolStrip();
-			this.toolStripDropDownButton1 = new System.Windows.Forms.ToolStripDropDownButton();
+			this.toolbar = new System.Windows.Forms.ToolStrip();
+			this.fileDropDown = new System.Windows.Forms.ToolStripDropDownButton();
 			this.newToolbarItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.saveToolbarItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.openToolbarItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.exitToolbarItem = new System.Windows.Forms.ToolStripMenuItem();
-			this.toolStripButton1 = new System.Windows.Forms.ToolStripButton();
-			this.toolStrip1.SuspendLayout();
+			this.toolbar.SuspendLayout();
 			this.SuspendLayout();
 			// 
-			// toolStrip1
+			// toolbar
 			// 
-			this.toolStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.toolStripDropDownButton1,
-            this.toolStripButton1});
-			this.toolStrip1.Location = new System.Drawing.Point(0, 0);
-			this.toolStrip1.Name = "toolStrip1";
-			this.toolStrip1.Size = new System.Drawing.Size(587, 25);
-			this.toolStrip1.TabIndex = 2;
-			this.toolStrip1.Text = "toolStrip1";
+			this.toolbar.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.fileDropDown});
+			this.toolbar.Location = new System.Drawing.Point(0, 0);
+			this.toolbar.Name = "toolbar";
+			this.toolbar.Size = new System.Drawing.Size(587, 25);
+			this.toolbar.TabIndex = 2;
+			this.toolbar.Text = "Toolbar";
 			// 
-			// toolStripDropDownButton1
+			// fileDropDown
 			// 
-			this.toolStripDropDownButton1.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
-			this.toolStripDropDownButton1.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+			this.fileDropDown.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
+			this.fileDropDown.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.newToolbarItem,
             this.saveToolbarItem,
             this.openToolbarItem,
             this.exitToolbarItem});
-			this.toolStripDropDownButton1.Name = "toolStripDropDownButton1";
-			this.toolStripDropDownButton1.Size = new System.Drawing.Size(38, 22);
-			this.toolStripDropDownButton1.Text = "File";
-			this.toolStripDropDownButton1.Click += new System.EventHandler(this.toolStripDropDownButton1_Click);
+			this.fileDropDown.Name = "fileDropDown";
+			this.fileDropDown.Size = new System.Drawing.Size(38, 22);
+			this.fileDropDown.Text = "File";
 			// 
 			// newToolbarItem
 			// 
@@ -89,29 +86,20 @@ namespace BeGraph {
 			this.exitToolbarItem.Text = "Exit";
 			this.exitToolbarItem.Click += new System.EventHandler(this.exitToolbarItem_Click);
 			// 
-			// toolStripButton1
-			// 
-			this.toolStripButton1.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-			this.toolStripButton1.Image = ((System.Drawing.Image)(resources.GetObject("toolStripButton1.Image")));
-			this.toolStripButton1.ImageTransparentColor = System.Drawing.Color.Magenta;
-			this.toolStripButton1.Name = "toolStripButton1";
-			this.toolStripButton1.Size = new System.Drawing.Size(23, 22);
-			this.toolStripButton1.Text = "toolStripButton1";
-			// 
 			// MainWnd
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
 			this.BackColor = System.Drawing.SystemColors.Control;
 			this.ClientSize = new System.Drawing.Size(587, 461);
-			this.Controls.Add(this.toolStrip1);
+			this.Controls.Add(this.toolbar);
 			this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
 			this.MinimumSize = new System.Drawing.Size(600, 500);
 			this.Name = "MainWnd";
 			this.Text = "BeGraph";
 			this.Load += new System.EventHandler(this.Form1_Load);
-			this.toolStrip1.ResumeLayout(false);
-			this.toolStrip1.PerformLayout();
+			this.toolbar.ResumeLayout(false);
+			this.toolbar.PerformLayout();
 			this.ResumeLayout(false);
 			this.PerformLayout();
 
@@ -122,13 +110,12 @@ namespace BeGraph {
 		#endregion
 
 		private GraphBox graphBox;
-		private ToolStrip toolStrip1;
+		private ToolStrip toolbar;
 		private ToolStripMenuItem exitToolbarItem;
 		private ToolStripMenuItem openToolbarItem;
 		private ToolStripMenuItem saveToolbarItem;
 		private ToolStripMenuItem newToolbarItem;
-		private ToolStripDropDownButton toolStripDropDownButton1;
-		private ToolStripButton toolStripButton1;
+		private ToolStripDropDownButton fileDropDown;
 	}
 }
 
