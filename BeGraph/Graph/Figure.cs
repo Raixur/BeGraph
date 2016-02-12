@@ -3,15 +3,22 @@
 
 namespace BeGraph {
     abstract class Figure {
-        public int id {
-			get; private set;
+
+		// Identifer of figure
+		private int id;
+
+		public int ID{
+			get {
+				return id;
+			}
 		}
-        static int nextID = 0;
+
+        private static int nextID = 0;
 
         public Figure() {
             id = nextID++;
         }
 
-		public abstract void draw(System.Drawing.Graphics gr);
+		public abstract void Draw(System.Drawing.Graphics gr);
     }
 }

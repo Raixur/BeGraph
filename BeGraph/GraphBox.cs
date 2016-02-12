@@ -47,7 +47,7 @@ namespace BeGraph {
 		/// </summary>
 		/// <param name="cursor"></param>
 		/// <returns></returns>
-		private bool haveSpace(Point cursor) {
+		private bool HaveSpace(Point cursor) {
 			int r = Vertex.r;
 			Point rbBorder = new Point(base.Width - r, base.Height - r);
 			if (!((cursor.X > r && cursor.X < rbBorder.X) && (cursor.Y > r && cursor.Y < rbBorder.Y)))
@@ -61,8 +61,8 @@ namespace BeGraph {
 		/// </summary>
 		/// <param name="p">p is current position of the mouse cusror</param>
 		/// <returns>Returns generated vertex</returns>
-		private Vertex generateVert(Point p) {
-			if (haveSpace(p)) {
+		private Vertex GenerateVert(Point p) {
+			if (HaveSpace(p)) {
 				InputDialog.InputDialog id = new InputDialog.InputDialog("Enter name of a vertex", "Vertex generation");
 				DialogResult dResult = id.ShowDialog(this);
 				if (dResult == DialogResult.OK) {
@@ -81,22 +81,21 @@ namespace BeGraph {
 		/// <param name="pe"></param>
 		protected override void OnPaint(PaintEventArgs pe) {
 			base.OnPaint(pe);
-			Pen p = new Pen(Color.Black);
-			g.draw(pe.Graphics);
+			g.Draw(pe.Graphics);
 		}
 
 		#region Events
 
 
 		private void g_GraphChanged(object sender, EventArgs e) {
-			((Graph)sender).draw(CreateGraphics());
+			((Graph)sender).Draw(CreateGraphics());
 		}
 
 		private void pb_MouseDown(object sender, MouseEventArgs me) {
 			switch (me.Button) {
 				case MouseButtons.Left:
 					if (me.Clicks == 1)
-						last = g.vertAt(me.Location);
+						last = g.VertAt(me.Location);
 					break;
 			}
 		}
@@ -105,7 +104,7 @@ namespace BeGraph {
 			switch (me.Button) {
 				case MouseButtons.Left:
 					if (me.Clicks == 1) {
-						Vertex tempSecond = g.vertAt(me.Location);
+						Vertex tempSecond = g.VertAt(me.Location);
 						if (last != null && tempSecond != null) {
 							Edge e = new Edge(last, tempSecond);
 							g += e;
@@ -117,8 +116,8 @@ namespace BeGraph {
 
 		private void pb_DoubleClick(object sender, EventArgs e) {
 			MouseEventArgs me = (MouseEventArgs)e;
-			if (g.vertAt(me.Location) == null) {
-				Vertex v = generateVert(me.Location);
+			if (g.VertAt(me.Location) == null) { 
+				Vertex v = GenerateVert(me.Location);
 				if (v != null)
 					g += v;
 			}

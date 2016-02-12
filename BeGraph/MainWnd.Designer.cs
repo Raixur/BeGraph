@@ -63,28 +63,28 @@ namespace BeGraph {
 			this.newToolbarItem.Name = "newToolbarItem";
 			this.newToolbarItem.Size = new System.Drawing.Size(152, 22);
 			this.newToolbarItem.Text = "New";
-			this.newToolbarItem.Click += new System.EventHandler(this.newToolbarItem_Click);
+			this.newToolbarItem.Click += new System.EventHandler(this.NewToolbarItem_Click);
 			// 
 			// saveToolbarItem
 			// 
 			this.saveToolbarItem.Name = "saveToolbarItem";
 			this.saveToolbarItem.Size = new System.Drawing.Size(152, 22);
 			this.saveToolbarItem.Text = "Save";
-			this.saveToolbarItem.Click += new System.EventHandler(this.saveToolbarItem_Click);
+			this.saveToolbarItem.Click += new System.EventHandler(this.SaveToolbarItem_Click);
 			// 
 			// openToolbarItem
 			// 
 			this.openToolbarItem.Name = "openToolbarItem";
 			this.openToolbarItem.Size = new System.Drawing.Size(152, 22);
 			this.openToolbarItem.Text = "Open";
-			this.openToolbarItem.Click += new System.EventHandler(this.openToolbarItem_Click);
+			this.openToolbarItem.Click += new System.EventHandler(this.OpenToolbarItem_Click);
 			// 
 			// exitToolbarItem
 			// 
 			this.exitToolbarItem.Name = "exitToolbarItem";
 			this.exitToolbarItem.Size = new System.Drawing.Size(152, 22);
 			this.exitToolbarItem.Text = "Exit";
-			this.exitToolbarItem.Click += new System.EventHandler(this.exitToolbarItem_Click);
+			this.exitToolbarItem.Click += new System.EventHandler(this.ExitToolbarItem_Click);
 			// 
 			// MainWnd
 			// 
@@ -97,7 +97,7 @@ namespace BeGraph {
 			this.MinimumSize = new System.Drawing.Size(600, 500);
 			this.Name = "MainWnd";
 			this.Text = "BeGraph";
-			this.Load += new System.EventHandler(this.Form1_Load);
+			this.Load += new System.EventHandler(this.MainWnd_Load);
 			this.toolbar.ResumeLayout(false);
 			this.toolbar.PerformLayout();
 			this.ResumeLayout(false);

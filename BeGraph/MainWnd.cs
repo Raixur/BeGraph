@@ -9,12 +9,12 @@ namespace BeGraph {
 			InitializeComponent();
 		}
 
-		private void Form1_Load(object sender, EventArgs e) {
+		private void MainWnd_Load(object sender, EventArgs e) {
 			this.WindowState = FormWindowState.Maximized;
 			this.FormBorderStyle = FormBorderStyle.Sizable;
 		}
 
-		private void saveToolbarItem_Click(object sender, EventArgs e) {
+		private void SaveToolbarItem_Click(object sender, EventArgs e) {
 			//TODO: implement async
 			SaveFileDialog saveDialog = new SaveFileDialog();
 			saveDialog.Filter = "Graph files (*.g)|*.g";
@@ -28,7 +28,7 @@ namespace BeGraph {
 			}
 		}
 
-		private void newToolbarItem_Click(object sender, EventArgs e) {
+		private void NewToolbarItem_Click(object sender, EventArgs e) {
 			if (graphBox != null)
 				graphBox.Dispose();
 			graphBox = new GraphBox();
@@ -36,11 +36,11 @@ namespace BeGraph {
 			this.Controls.Add(graphBox);
 		}
 
-		private void openToolbarItem_Click(object sender, EventArgs e) {
+		private void OpenToolbarItem_Click(object sender, EventArgs e) {
 			//TODO: implement
 		}
 
-		private void exitToolbarItem_Click(object sender, EventArgs e) {
+		private void ExitToolbarItem_Click(object sender, EventArgs e) {
 			//TODO: implement
 		}
 	}
