@@ -102,9 +102,7 @@ namespace BeGraph {
 			this.toolbar.PerformLayout();
 			this.ResumeLayout(false);
 			this.PerformLayout();
-
 		}
-
 
 
 		#endregion

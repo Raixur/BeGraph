@@ -11,6 +11,7 @@ namespace BeGraph {
 
 		private Graph g;
 		private Vertex last;
+		private bool isMouseButtonLeftDown = false;
 
 		public Graph G {
 			get {
@@ -38,6 +39,7 @@ namespace BeGraph {
 			MouseDown += new MouseEventHandler(pb_MouseDown);
 			MouseUp += new MouseEventHandler(pb_MouseUp);
 			MouseDoubleClick += new MouseEventHandler(pb_DoubleClick);
+			MouseMove += new MouseEventHandler(pb_MouseMove);
 			g.GraphChanged += new EventHandler(g_GraphChanged);
 		}
 
@@ -94,9 +96,31 @@ namespace BeGraph {
 		private void pb_MouseDown(object sender, MouseEventArgs me) {
 			switch (me.Button) {
 				case MouseButtons.Left:
-					if (me.Clicks == 1)
+					if (me.Clicks == 1) {
+						isMouseButtonLeftDown = true;
 						last = g.VertAt(me.Location);
+					}
 					break;
+				case MouseButtons.Right:
+					// TODO: implement moving vertexes
+					break;
+			}
+		}
+
+		private void pb_MouseMove(object sender, MouseEventArgs me) {
+			if (isMouseButtonLeftDown && last != null) {
+				
+				Pen linePen = new Pen(Color.Blue, 2);
+				Graphics lineGraphics = CreateGraphics();
+				Invalidate();
+				Update();
+				lineGraphics.SmoothingMode = System.Drawing.Drawing2D.SmoothingMode.AntiAlias;
+				lineGraphics.CompositingQuality = System.Drawing.Drawing2D.CompositingQuality.HighQuality;
+				lineGraphics.InterpolationMode = System.Drawing.Drawing2D.InterpolationMode.HighQualityBicubic;
+				lineGraphics.DrawLine(linePen, last.Position, me.Location);
+				
+				lineGraphics.Dispose();
+				linePen.Dispose();
 			}
 		}
 
@@ -104,10 +128,14 @@ namespace BeGraph {
 			switch (me.Button) {
 				case MouseButtons.Left:
 					if (me.Clicks == 1) {
+						isMouseButtonLeftDown = false;
 						Vertex tempSecond = g.VertAt(me.Location);
 						if (last != null && tempSecond != null) {
 							Edge e = new Edge(last, tempSecond);
 							g += e;
+						}
+						else {
+							Invalidate();
 						}
 					}
 					break;
