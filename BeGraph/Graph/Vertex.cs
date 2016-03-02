@@ -36,6 +36,8 @@ namespace BeGraph{
 
 			// Рисование элипса и названия точки
 			gr.SmoothingMode = System.Drawing.Drawing2D.SmoothingMode.AntiAlias;
+			gr.CompositingQuality = System.Drawing.Drawing2D.CompositingQuality.HighQuality;
+			gr.InterpolationMode = System.Drawing.Drawing2D.InterpolationMode.High;
 			gr.FillEllipse(b, position.X-r, position.Y-r, 2*r, 2*r);
 			gr.DrawString(name, f, b, position.X + 15, position.Y - 10);
 

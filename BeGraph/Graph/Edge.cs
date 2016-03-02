@@ -40,6 +40,8 @@ namespace BeGraph
 
 			// Рисование линии между вершинам графа
 			gr.SmoothingMode = System.Drawing.Drawing2D.SmoothingMode.AntiAlias;
+			gr.InterpolationMode = System.Drawing.Drawing2D.InterpolationMode.High;
+			gr.CompositingQuality = System.Drawing.Drawing2D.CompositingQuality.HighQuality;
 			gr.DrawLine(p, fRad, sRad);
 
 			p.Dispose();
