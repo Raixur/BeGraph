@@ -32,7 +32,7 @@ namespace BeGraph{
 		}
 
 		/// <summary>
-		/// Check whether point is located inside vertex
+		/// Checks whether point is located inside vertex
 		/// </summary>
 		/// <param name="p"></param>
 		/// <returns>True if point in radius, otherwise - false</returns>
@@ -41,7 +41,7 @@ namespace BeGraph{
 		}
 
 		public override string ToString() {
-			return name + "(" + position.X + ", " + position.Y + ")";
+			return name + ">" + position.X + "," + position.Y;
 		}
 
 		public override bool Equals(object obj) {
@@ -56,7 +56,7 @@ namespace BeGraph{
 		}
 
 		/// <summary>
-		/// Draw circle and name of the vertex
+		/// Draws circle and name of the vertex
 		/// </summary>
 		/// <param name="gr"></param>
 		public override void Draw(Graphics gr) {

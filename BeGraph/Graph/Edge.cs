@@ -24,7 +24,7 @@ namespace BeGraph
 		}
 
 		public override string ToString() {
-			return first + "->" + second + " (" + weight + ")";
+			return "[" + first + "]-[" + second + "]=[" + weight + "]";
 		}
 
 		public override void Draw(Graphics gr) {
