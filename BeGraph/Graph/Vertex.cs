@@ -1,26 +1,47 @@
 ﻿using System;
 using System.Drawing;
 
+
 namespace BeGraph{
-#pragma warning disable CS0659 // Тип переопределяет Object.Equals(object o), но не переопределяет Object.GetHashCode()
 	class Vertex : Figure {
-#pragma warning restore CS0659 // Тип переопределяет Object.Equals(object o), но не переопределяет Object.GetHashCode()
-		string name;
-		public Point position;
 
-		public static readonly int r = 8;
+		// Radius of the vertex
+		public static readonly int r = 6;
 
-        public Vertex(string n) {
-            name = n;
-        }
+		// Name of the vertex, which would be displayed (must be unique for graph)
+		private string name;
+		
+		// Position on displaying element
+		private Point position;
+
+		public string Name {
+			get {
+				return name;
+			}
+		}
+
+		public Point Position {
+			get {
+				return position;
+			}
+		}
 
 		public Vertex(string n, Point p) {
 			name = n;
 			position = new Point(p.X, p.Y);
 		}
 
-		public bool isInRange(Point p) {
+		/// <summary>
+		/// Checks whether point is located inside vertex
+		/// </summary>
+		/// <param name="p"></param>
+		/// <returns>True if point in radius, otherwise - false</returns>
+		public bool IsInRange(Point p) {
 			return (Math.Pow(p.X - position.X, 2) + Math.Pow(p.Y - position.Y, 2) <= Math.Pow(4*r, 2));
+		}
+
+		public override string ToString() {
+			return name + ">" + position.X + "," + position.Y;
 		}
 
 		public override bool Equals(object obj) {
@@ -30,21 +51,34 @@ namespace BeGraph{
 			return name == v.name;
 		}
 
-		public override void draw(Graphics gr) {
-			SolidBrush b = new SolidBrush(Color.Red);
-			Font f = new Font("Arial", 11);
-
-			// Рисование элипса и названия точки
-			gr.SmoothingMode = System.Drawing.Drawing2D.SmoothingMode.AntiAlias;
-			gr.CompositingQuality = System.Drawing.Drawing2D.CompositingQuality.HighQuality;
-			gr.InterpolationMode = System.Drawing.Drawing2D.InterpolationMode.High;
-			gr.FillEllipse(b, position.X-r, position.Y-r, 2*r, 2*r);
-			gr.DrawString(name, f, b, position.X + 15, position.Y - 10);
-
-			f.Dispose();
-			b.Dispose();
+		public override int GetHashCode() {
+			return ID;
 		}
 
+		/// <summary>
+		/// Draws circle and name of the vertex
+		/// </summary>
+		/// <param name="gr"></param>
+		public override void Draw(Graphics gr) {
+			Pen outerRingPen = new Pen(Color.Blue, 2);
+			SolidBrush innerCircleBrush = new SolidBrush(Color.Red);
+			Font textFont = new Font("Arial", 11);
+
+			gr.FillEllipse(innerCircleBrush, position.X-r, position.Y-r, 2*r, 2*r);
+			gr.DrawEllipse(outerRingPen, position.X - r, position.Y - r, 2 * r, 2 * r);
+			gr.DrawString(name, textFont, innerCircleBrush, position.X + 15, position.Y - 20);
+
+			textFont.Dispose();
+			innerCircleBrush.Dispose();
+			outerRingPen.Dispose();
+		}
+
+		/// <summary>
+		/// Creates an edge from existing vertexes
+		/// </summary>
+		/// <param name="v1"></param>
+		/// <param name="v2"></param>
+		/// <returns></returns>
 		public static Edge operator +(Vertex v1, Vertex v2) {
 			return new Edge(v1, v2);
 		}

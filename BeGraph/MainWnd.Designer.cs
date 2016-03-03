@@ -27,119 +27,100 @@ namespace BeGraph {
 		/// </summary>
 		private void InitializeComponent() {
 			System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainWnd));
-			this.graphBox = new BeGraph.GraphBox();
-			this.toolStrip1 = new System.Windows.Forms.ToolStrip();
-			this.toolStripDropDownButton1 = new System.Windows.Forms.ToolStripDropDownButton();
-			this.openToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-			this.saveToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-			this.openToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
-			this.exitToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-			this.toolStripButton1 = new System.Windows.Forms.ToolStripButton();
-			((System.ComponentModel.ISupportInitialize)(this.graphBox)).BeginInit();
-			this.toolStrip1.SuspendLayout();
+			this.toolbar = new System.Windows.Forms.ToolStrip();
+			this.fileDropDown = new System.Windows.Forms.ToolStripDropDownButton();
+			this.newToolbarItem = new System.Windows.Forms.ToolStripMenuItem();
+			this.saveToolbarItem = new System.Windows.Forms.ToolStripMenuItem();
+			this.openToolbarItem = new System.Windows.Forms.ToolStripMenuItem();
+			this.exitToolbarItem = new System.Windows.Forms.ToolStripMenuItem();
+			this.toolbar.SuspendLayout();
 			this.SuspendLayout();
 			// 
-			// graphBox
+			// toolbar
 			// 
-			this.graphBox.BackColor = System.Drawing.Color.White;
-			this.graphBox.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
-			this.graphBox.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-			this.graphBox.Location = new System.Drawing.Point(12, 28);
-			this.graphBox.Name = "graphBox";
-			this.graphBox.Size = new System.Drawing.Size(563, 421);
-			this.graphBox.TabIndex = 3;
-			this.graphBox.TabStop = false;
+			this.toolbar.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.fileDropDown});
+			this.toolbar.Location = new System.Drawing.Point(0, 0);
+			this.toolbar.Name = "toolbar";
+			this.toolbar.Size = new System.Drawing.Size(587, 25);
+			this.toolbar.TabIndex = 2;
+			this.toolbar.Text = "Toolbar";
 			// 
-			// toolStrip1
+			// fileDropDown
 			// 
-			this.toolStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.toolStripDropDownButton1,
-            this.toolStripButton1});
-			this.toolStrip1.Location = new System.Drawing.Point(0, 0);
-			this.toolStrip1.Name = "toolStrip1";
-			this.toolStrip1.Size = new System.Drawing.Size(587, 25);
-			this.toolStrip1.TabIndex = 2;
-			this.toolStrip1.Text = "toolStrip1";
+			this.fileDropDown.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
+			this.fileDropDown.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.newToolbarItem,
+            this.saveToolbarItem,
+            this.openToolbarItem,
+            this.exitToolbarItem});
+			this.fileDropDown.Name = "fileDropDown";
+			this.fileDropDown.Size = new System.Drawing.Size(38, 22);
+			this.fileDropDown.Text = "File";
 			// 
-			// toolStripDropDownButton1
+			// newToolbarItem
 			// 
-			this.toolStripDropDownButton1.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
-			this.toolStripDropDownButton1.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.openToolStripMenuItem,
-            this.saveToolStripMenuItem,
-            this.openToolStripMenuItem1,
-            this.exitToolStripMenuItem});
-			this.toolStripDropDownButton1.Name = "toolStripDropDownButton1";
-			this.toolStripDropDownButton1.Size = new System.Drawing.Size(38, 22);
-			this.toolStripDropDownButton1.Text = "File";
-			this.toolStripDropDownButton1.Click += new System.EventHandler(this.toolStripDropDownButton1_Click);
+			this.newToolbarItem.Name = "newToolbarItem";
+			this.newToolbarItem.Size = new System.Drawing.Size(152, 22);
+			this.newToolbarItem.Text = "New";
+			this.newToolbarItem.Click += new System.EventHandler(this.NewToolbarItem_Click);
 			// 
-			// openToolStripMenuItem
+			// saveToolbarItem
 			// 
-			this.openToolStripMenuItem.Name = "openToolStripMenuItem";
-			this.openToolStripMenuItem.Size = new System.Drawing.Size(103, 22);
-			this.openToolStripMenuItem.Text = "New";
+			this.saveToolbarItem.Name = "saveToolbarItem";
+			this.saveToolbarItem.Size = new System.Drawing.Size(152, 22);
+			this.saveToolbarItem.Text = "Save";
+			this.saveToolbarItem.Click += new System.EventHandler(this.SaveToolbarItem_Click);
 			// 
-			// saveToolStripMenuItem
+			// openToolbarItem
 			// 
-			this.saveToolStripMenuItem.Name = "saveToolStripMenuItem";
-			this.saveToolStripMenuItem.Size = new System.Drawing.Size(103, 22);
-			this.saveToolStripMenuItem.Text = "Save";
+			this.openToolbarItem.Name = "openToolbarItem";
+			this.openToolbarItem.Size = new System.Drawing.Size(152, 22);
+			this.openToolbarItem.Text = "Open";
+			this.openToolbarItem.Click += new System.EventHandler(this.OpenToolbarItem_Click);
 			// 
-			// openToolStripMenuItem1
+			// exitToolbarItem
 			// 
-			this.openToolStripMenuItem1.Name = "openToolStripMenuItem1";
-			this.openToolStripMenuItem1.Size = new System.Drawing.Size(103, 22);
-			this.openToolStripMenuItem1.Text = "Open";
+			this.exitToolbarItem.Name = "exitToolbarItem";
+			this.exitToolbarItem.Size = new System.Drawing.Size(152, 22);
+			this.exitToolbarItem.Text = "Exit";
+			this.exitToolbarItem.Click += new System.EventHandler(this.ExitToolbarItem_Click);
 			// 
-			// exitToolStripMenuItem
-			// 
-			this.exitToolStripMenuItem.Name = "exitToolStripMenuItem";
-			this.exitToolStripMenuItem.Size = new System.Drawing.Size(103, 22);
-			this.exitToolStripMenuItem.Text = "Exit";
-			// 
-			// toolStripButton1
-			// 
-			this.toolStripButton1.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-			this.toolStripButton1.Image = ((System.Drawing.Image)(resources.GetObject("toolStripButton1.Image")));
-			this.toolStripButton1.ImageTransparentColor = System.Drawing.Color.Magenta;
-			this.toolStripButton1.Name = "toolStripButton1";
-			this.toolStripButton1.Size = new System.Drawing.Size(23, 22);
-			this.toolStripButton1.Text = "toolStripButton1";
-			// 
-			// Form1
+			// MainWnd
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
 			this.BackColor = System.Drawing.SystemColors.Control;
 			this.ClientSize = new System.Drawing.Size(587, 461);
-			this.Controls.Add(this.toolStrip1);
-			this.Controls.Add(this.graphBox);
+			this.Controls.Add(this.toolbar);
 			this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
 			this.MinimumSize = new System.Drawing.Size(600, 500);
-			this.Name = "Form1";
+			this.Name = "MainWnd";
 			this.Text = "BeGraph";
-			this.Load += new System.EventHandler(this.Form1_Load);
-			((System.ComponentModel.ISupportInitialize)(this.graphBox)).EndInit();
-			this.toolStrip1.ResumeLayout(false);
-			this.toolStrip1.PerformLayout();
+			this.Load += new System.EventHandler(this.MainWnd_Load);
+			this.FormClosing += new FormClosingEventHandler(MainWnd_Closing);
+			this.toolbar.ResumeLayout(false);
+			this.toolbar.PerformLayout();
 			this.ResumeLayout(false);
 			this.PerformLayout();
 
-		}
+			//graphBuffer
+			this.graphBuffer = "";
 
+			Application.ApplicationExit += new System.EventHandler(this.ExitToolbarItem_Click);
+		}
 
 
 		#endregion
 
 		private GraphBox graphBox;
-		private ToolStrip toolStrip1;
-		private ToolStripMenuItem exitToolStripMenuItem;
-		private ToolStripMenuItem openToolStripMenuItem1;
-		private ToolStripMenuItem saveToolStripMenuItem;
-		private ToolStripMenuItem openToolStripMenuItem;
-		private ToolStripDropDownButton toolStripDropDownButton1;
-		private ToolStripButton toolStripButton1;
+		private ToolStrip toolbar;
+		private ToolStripMenuItem exitToolbarItem;
+		private ToolStripMenuItem openToolbarItem;
+		private ToolStripMenuItem saveToolbarItem;
+		private ToolStripMenuItem newToolbarItem;
+		private ToolStripDropDownButton fileDropDown;
+		private string graphBuffer; 
 	}
 }
 
