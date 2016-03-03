@@ -9,15 +9,37 @@ namespace BeGraph {
 	/// </summary>
 	class GraphBox : PictureBox {
 
-		private Graph g = new Graph();
+		private Graph g;
 		private Vertex last;
+		private bool isMouseButtonLeftDown = false;
+
+		public Graph G {
+			get {
+				return g;
+			}
+
+			set {
+				g = value;
+			}
+		}
 
 		public GraphBox() {
-			
+			g = new Graph();
+
+			this.BackColor = System.Drawing.Color.White;
+			this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
+			this.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+			this.Location = new System.Drawing.Point(12, 28);
+			this.Name = "graphBox";
+			this.Size = new System.Drawing.Size(563, 421);
+			this.TabIndex = 3;
+			this.TabStop = false;
+
 			// Binding event handlers to events.
 			MouseDown += new MouseEventHandler(pb_MouseDown);
 			MouseUp += new MouseEventHandler(pb_MouseUp);
 			MouseDoubleClick += new MouseEventHandler(pb_DoubleClick);
+			MouseMove += new MouseEventHandler(pb_MouseMove);
 			g.GraphChanged += new EventHandler(g_GraphChanged);
 		}
 
@@ -27,7 +49,7 @@ namespace BeGraph {
 		/// </summary>
 		/// <param name="cursor"></param>
 		/// <returns></returns>
-		private bool haveSpace(Point cursor) {
+		private bool HaveSpace(Point cursor) {
 			int r = Vertex.r;
 			Point rbBorder = new Point(base.Width - r, base.Height - r);
 			if (!((cursor.X > r && cursor.X < rbBorder.X) && (cursor.Y > r && cursor.Y < rbBorder.Y)))
@@ -41,8 +63,8 @@ namespace BeGraph {
 		/// </summary>
 		/// <param name="p">p is current position of the mouse cusror</param>
 		/// <returns>Returns generated vertex</returns>
-		private Vertex generateVert(Point p) {
-			if (haveSpace(p)) {
+		private Vertex GenerateVert(Point p) {
+			if (HaveSpace(p)) {
 				InputDialog.InputDialog id = new InputDialog.InputDialog("Enter name of a vertex", "Vertex generation");
 				DialogResult dResult = id.ShowDialog(this);
 				if (dResult == DialogResult.OK) {
@@ -61,23 +83,44 @@ namespace BeGraph {
 		/// <param name="pe"></param>
 		protected override void OnPaint(PaintEventArgs pe) {
 			base.OnPaint(pe);
-			Pen p = new Pen(Color.Black);
-			g.draw(pe.Graphics);
+			g.Draw(pe.Graphics);
 		}
 
 		#region Events
 
 
 		private void g_GraphChanged(object sender, EventArgs e) {
-			((Graph)sender).draw(CreateGraphics());
+			((Graph)sender).Draw(CreateGraphics());
 		}
 
 		private void pb_MouseDown(object sender, MouseEventArgs me) {
 			switch (me.Button) {
 				case MouseButtons.Left:
-					if (me.Clicks == 1)
-						last = g.vertAt(me.Location);
+					if (me.Clicks == 1) {
+						isMouseButtonLeftDown = true;
+						last = g.VertAt(me.Location);
+					}
 					break;
+				case MouseButtons.Right:
+					// TODO: implement moving vertexes
+					break;
+			}
+		}
+
+		private void pb_MouseMove(object sender, MouseEventArgs me) {
+			if (isMouseButtonLeftDown && last != null) {
+				
+				Pen linePen = new Pen(Color.Blue, 2);
+				Graphics lineGraphics = CreateGraphics();
+				Invalidate();
+				Update();
+				lineGraphics.SmoothingMode = System.Drawing.Drawing2D.SmoothingMode.AntiAlias;
+				lineGraphics.CompositingQuality = System.Drawing.Drawing2D.CompositingQuality.HighQuality;
+				lineGraphics.InterpolationMode = System.Drawing.Drawing2D.InterpolationMode.HighQualityBicubic;
+				lineGraphics.DrawLine(linePen, last.Position, me.Location);
+				
+				lineGraphics.Dispose();
+				linePen.Dispose();
 			}
 		}
 
@@ -85,10 +128,14 @@ namespace BeGraph {
 			switch (me.Button) {
 				case MouseButtons.Left:
 					if (me.Clicks == 1) {
-						Vertex tempSecond = g.vertAt(me.Location);
+						isMouseButtonLeftDown = false;
+						Vertex tempSecond = g.VertAt(me.Location);
 						if (last != null && tempSecond != null) {
 							Edge e = new Edge(last, tempSecond);
 							g += e;
+						}
+						else {
+							Invalidate();
 						}
 					}
 					break;
@@ -97,8 +144,8 @@ namespace BeGraph {
 
 		private void pb_DoubleClick(object sender, EventArgs e) {
 			MouseEventArgs me = (MouseEventArgs)e;
-			if (g.vertAt(me.Location) == null) {
-				Vertex v = generateVert(me.Location);
+			if (g.VertAt(me.Location) == null) { 
+				Vertex v = GenerateVert(me.Location);
 				if (v != null)
 					g += v;
 			}
