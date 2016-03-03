@@ -98,10 +98,16 @@ namespace BeGraph {
 			this.Name = "MainWnd";
 			this.Text = "BeGraph";
 			this.Load += new System.EventHandler(this.MainWnd_Load);
+			this.FormClosing += new FormClosingEventHandler(MainWnd_Closing);
 			this.toolbar.ResumeLayout(false);
 			this.toolbar.PerformLayout();
 			this.ResumeLayout(false);
 			this.PerformLayout();
+
+			//graphBuffer
+			this.graphBuffer = "";
+
+			Application.ApplicationExit += new System.EventHandler(this.ExitToolbarItem_Click);
 		}
 
 
@@ -114,6 +120,7 @@ namespace BeGraph {
 		private ToolStripMenuItem saveToolbarItem;
 		private ToolStripMenuItem newToolbarItem;
 		private ToolStripDropDownButton fileDropDown;
+		private string graphBuffer; 
 	}
 }
 

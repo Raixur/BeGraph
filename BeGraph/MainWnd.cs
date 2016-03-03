@@ -2,7 +2,6 @@
 using System.Drawing;
 using System.IO;
 using System.Windows.Forms;
-using System.Text.RegularExpressions;
 
 namespace BeGraph {
 	public partial class MainWnd : Form {
@@ -26,6 +25,7 @@ namespace BeGraph {
 					if (sw != null)
 						sw.WriteLine(graphBox.G);
 				}
+				graphBuffer = graphBox.G.ToString();
 			}
 		}
 
@@ -70,6 +70,7 @@ namespace BeGraph {
 
 						}
 					}
+					graphBuffer = graphBox.G.ToString();
 				}
 			}
 			catch (FormatException) {
@@ -78,7 +79,16 @@ namespace BeGraph {
 		}
 
 		private void ExitToolbarItem_Click(object sender, EventArgs e) {
-			//TODO: implement
+			this.Close();
+		}
+
+		private void MainWnd_Closing(object sender, System.ComponentModel.CancelEventArgs e) {
+			if (graphBuffer != graphBox.G.ToString()) {
+				if (MessageBox.Show("Save latest changes?", "BeGraph", MessageBoxButtons.YesNo) == DialogResult.Yes) {
+					e.Cancel = true;
+					SaveToolbarItem_Click(this, new EventArgs());
+				}
+			}
 		}
 
 		/// <summary>
