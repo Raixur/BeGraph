@@ -83,7 +83,7 @@ namespace BeGraph {
 		}
 
 		private void MainWnd_Closing(object sender, System.ComponentModel.CancelEventArgs e) {
-			if (graphBuffer != graphBox.G.ToString()) {
+			if (graphBox != null && graphBuffer != graphBox.G.ToString()) {
 				if (MessageBox.Show("Save latest changes?", "BeGraph", MessageBoxButtons.YesNo) == DialogResult.Yes) {
 					e.Cancel = true;
 					SaveToolbarItem_Click(this, new EventArgs());
