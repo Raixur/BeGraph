@@ -1,10 +1,13 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Drawing;
 using System.IO;
 using System.Windows.Forms;
 
 namespace BeGraph {
 	public partial class MainWnd : Form {
+
+		string graphBuffer = "";
 		public MainWnd() {
 			InitializeComponent();
 		}
@@ -14,6 +17,7 @@ namespace BeGraph {
 			this.FormBorderStyle = FormBorderStyle.Sizable;
 		}
 
+		#region Toolbar events
 		private void SaveToolbarItem_Click(object sender, EventArgs e) {
 			//TODO: implement async
 			SaveFileDialog saveDialog = new SaveFileDialog();
@@ -83,7 +87,7 @@ namespace BeGraph {
 		}
 
 		private void MainWnd_Closing(object sender, System.ComponentModel.CancelEventArgs e) {
-			if (graphBuffer != graphBox.G.ToString()) {
+			if (graphBox != null && graphBuffer != graphBox.G.ToString()) {
 				if (MessageBox.Show("Save latest changes?", "BeGraph", MessageBoxButtons.YesNo) == DialogResult.Yes) {
 					e.Cancel = true;
 					SaveToolbarItem_Click(this, new EventArgs());
@@ -124,6 +128,6 @@ namespace BeGraph {
 			return new Edge(ToVetex(splitedString[0]), ToVetex(splitedString[1]), int.Parse(splitedString[2]) );
 		}
 
+		#endregion Tool
 	}
 }
-

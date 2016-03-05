@@ -104,10 +104,6 @@ namespace BeGraph {
 			this.ResumeLayout(false);
 			this.PerformLayout();
 
-			//graphBuffer
-			this.graphBuffer = "";
-
-			Application.ApplicationExit += new System.EventHandler(this.ExitToolbarItem_Click);
 		}
 
 
@@ -120,7 +116,6 @@ namespace BeGraph {
 		private ToolStripMenuItem saveToolbarItem;
 		private ToolStripMenuItem newToolbarItem;
 		private ToolStripDropDownButton fileDropDown;
-		private string graphBuffer; 
 	}
 }
 

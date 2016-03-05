@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Drawing;
+using System.Drawing.Drawing2D;
 using System.Windows.Forms;
 
 namespace BeGraph {
@@ -11,6 +12,8 @@ namespace BeGraph {
 
 		private Graph g;
 		private Vertex last;
+		private Point currentPos;
+
 		private bool isMouseButtonLeftDown = false;
 
 		public Graph G {
@@ -65,32 +68,59 @@ namespace BeGraph {
 		/// <returns>Returns generated vertex</returns>
 		private Vertex GenerateVert(Point p) {
 			if (HaveSpace(p)) {
-				InputDialog.InputDialog id = new InputDialog.InputDialog("Enter name of a vertex", "Vertex generation");
-				DialogResult dResult = id.ShowDialog(this);
-				if (dResult == DialogResult.OK) {
-					Vertex v = new Vertex(id.getInput(), p);			
+
+				//Display dialog which requires to enter name of vertex
+				InputDialog.InputDialog inputDialog = new InputDialog.InputDialog("Enter name of a vertex", "Vertex generation");
+				DialogResult dialogResult = inputDialog.ShowDialog(this);
+
+				if (dialogResult == DialogResult.OK) {
+					Vertex v = new Vertex(inputDialog.InputText, p);
 					return v;
 				}
 			}
-			else
+			// If there is not enough place to put a vertex displays error dialog
+			else {
 				MessageBox.Show("Invalid place to put a vertex!", "Error", MessageBoxButtons.OK);
+			}
 			return null;
 		}
 
 		/// <summary>
-		/// Overriding of the paint event for GraphBox
+		/// Overriding the paint event for GraphBox
 		/// </summary>
 		/// <param name="pe"></param>
 		protected override void OnPaint(PaintEventArgs pe) {
 			base.OnPaint(pe);
+
+			// Setting graphics quality to high
+			pe.Graphics.SmoothingMode = System.Drawing.Drawing2D.SmoothingMode.HighQuality;
+			pe.Graphics.InterpolationMode = System.Drawing.Drawing2D.InterpolationMode.High;
+			pe.Graphics.CompositingQuality = System.Drawing.Drawing2D.CompositingQuality.HighQuality;
+
+			//Draws grapgh
 			g.Draw(pe.Graphics);
+
+			//Draws a line from vertex to current position of mouse cursor
+			if(isMouseButtonLeftDown && last != null && last.Position != currentPos) {
+				using (Pen blackPen = new Pen(Color.Black, 2)) {
+					AdjustableArrowCap bigArrow = new AdjustableArrowCap(5, 5);
+					blackPen.CustomEndCap = bigArrow;
+			
+					double c = Math.Sqrt(Math.Pow(currentPos.X - last.Position.X, 2) + Math.Pow(currentPos.Y - last.Position.Y, 2));
+					double sin = (currentPos.Y - last.Position.Y) / c;
+					double cos = (currentPos.X - last.Position.X) / c;
+					Point startPoint = new Point(last.Position.X + (int)(cos * Vertex.r), last.Position.Y + (int)(sin * Vertex.r));
+
+					pe.Graphics.DrawLine(blackPen, startPoint, currentPos);
+				}
+			}
 		}
 
 		#region Events
 
 
 		private void g_GraphChanged(object sender, EventArgs e) {
-			((Graph)sender).Draw(CreateGraphics());
+			Invalidate();
 		}
 
 		private void pb_MouseDown(object sender, MouseEventArgs me) {
@@ -99,6 +129,7 @@ namespace BeGraph {
 					if (me.Clicks == 1) {
 						isMouseButtonLeftDown = true;
 						last = g.VertAt(me.Location);
+						currentPos = me.Location;
 					}
 					break;
 				case MouseButtons.Right:
@@ -109,18 +140,8 @@ namespace BeGraph {
 
 		private void pb_MouseMove(object sender, MouseEventArgs me) {
 			if (isMouseButtonLeftDown && last != null) {
-				
-				Pen linePen = new Pen(Color.Blue, 2);
-				Graphics lineGraphics = CreateGraphics();
+				currentPos = me.Location;
 				Invalidate();
-				Update();
-				lineGraphics.SmoothingMode = System.Drawing.Drawing2D.SmoothingMode.AntiAlias;
-				lineGraphics.CompositingQuality = System.Drawing.Drawing2D.CompositingQuality.HighQuality;
-				lineGraphics.InterpolationMode = System.Drawing.Drawing2D.InterpolationMode.HighQualityBicubic;
-				lineGraphics.DrawLine(linePen, last.Position, me.Location);
-				
-				lineGraphics.Dispose();
-				linePen.Dispose();
 			}
 		}
 
@@ -142,6 +163,11 @@ namespace BeGraph {
 			}
 		}
 
+		/// <summary>
+		/// Creates a new vertex at the point of double click
+		/// </summary>
+		/// <param name="sender"></param>
+		/// <param name="e"></param>
 		private void pb_DoubleClick(object sender, EventArgs e) {
 			MouseEventArgs me = (MouseEventArgs)e;
 			if (g.VertAt(me.Location) == null) { 

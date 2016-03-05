@@ -25,10 +25,10 @@ namespace BeGraph
 			gr.CompositingQuality = System.Drawing.Drawing2D.CompositingQuality.HighQuality;
 			gr.InterpolationMode = System.Drawing.Drawing2D.InterpolationMode.HighQualityBicubic;
 			gr.Clear(System.Drawing.Color.White);
-			foreach (Vertex v in vertexes)
-				v.Draw(gr);
 			foreach (Edge e in edges)
 				e.Draw(gr);
+			foreach (Vertex v in vertexes)
+				v.Draw(gr);
 		}
 
 		public override string ToString() {
