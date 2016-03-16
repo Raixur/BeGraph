@@ -19,7 +19,7 @@ namespace BeGraph{
 				return name;
 			}
 		}
-
+		
 		public Point Position {
 			get {
 				return position;
@@ -38,6 +38,10 @@ namespace BeGraph{
 		/// <returns>True if point in radius, otherwise - false</returns>
 		public bool IsInRange(Point p) {
 			return (Math.Pow(p.X - position.X, 2) + Math.Pow(p.Y - position.Y, 2) <= Math.Pow(4*r, 2));
+		}
+
+		public void MoveTo(Point p) {
+			position = p;
 		}
 
 		public override string ToString() {

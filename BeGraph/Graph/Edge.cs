@@ -10,19 +10,29 @@ namespace BeGraph
 		private Vertex second;
         private double weight;
 
+		public Vertex First {
+			get {
+				return first;
+			}
+		} 
+		public Vertex Second {
+			get {
+				return second;
+			}
+		}
+
+		public double Weight {
+			get {
+				return weight;
+			}
+		}
+
         public Edge(Vertex f, Vertex s, double w = 0.0){
             first = f;
             second = s;
             weight = w;
         }
-
-		public Vertex GetFirst() {
-			return first;
-		}
-
-		public Vertex GetSecond() {
-			return second;
-		}
+		
 
 		public override string ToString() {
 			return "[" + first + "]-[" + second + "]=[" + weight + "]";
@@ -37,7 +47,11 @@ namespace BeGraph
 			Point textLocation;
 
 			if (first.Position != second.Position) {
-				// Calculation of begin and end points of edge. 
+				gr.SmoothingMode = System.Drawing.Drawing2D.SmoothingMode.AntiAlias;
+				gr.CompositingQuality = System.Drawing.Drawing2D.CompositingQuality.HighQuality;
+				gr.InterpolationMode = System.Drawing.Drawing2D.InterpolationMode.HighQualityBicubic;
+
+				// Calculation of start and end points of edge. 
 				double c = Math.Sqrt(Math.Pow(second.Position.X - first.Position.X, 2) + Math.Pow(second.Position.Y - first.Position.Y, 2));
 				double sin = (second.Position.Y - first.Position.Y) / c;
 				double cos = (second.Position.X - first.Position.X) / c;

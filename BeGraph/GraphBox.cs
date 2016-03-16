@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Drawing;
 using System.Drawing.Drawing2D;
 using System.Windows.Forms;
@@ -15,6 +14,7 @@ namespace BeGraph {
 		private Point currentPos;
 
 		private bool isMouseButtonLeftDown = false;
+		private bool isMouseButtonRightDown = false;
 
 		public Graph G {
 			get {
@@ -133,7 +133,10 @@ namespace BeGraph {
 					}
 					break;
 				case MouseButtons.Right:
-					// TODO: implement moving vertexes
+					if (me.Clicks == 1) {
+						isMouseButtonRightDown = true;
+						last = g.VertAt(me.Location);
+					}
 					break;
 			}
 		}
@@ -142,6 +145,12 @@ namespace BeGraph {
 			if (isMouseButtonLeftDown && last != null) {
 				currentPos = me.Location;
 				Invalidate();
+			}
+			if (isMouseButtonRightDown && last != null) {
+				if (HaveSpace(me.Location)) {
+					last.MoveTo(me.Location);
+					Invalidate();
+				}
 			}
 		}
 
@@ -158,6 +167,12 @@ namespace BeGraph {
 						else {
 							Invalidate();
 						}
+					}
+					break;
+
+				case MouseButtons.Right:
+					if(me.Clicks == 1) {
+						isMouseButtonRightDown = false;
 					}
 					break;
 			}

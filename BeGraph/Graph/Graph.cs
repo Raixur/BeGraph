@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Runtime.Serialization;
 
 
 namespace BeGraph
@@ -24,7 +23,7 @@ namespace BeGraph
 			gr.SmoothingMode = System.Drawing.Drawing2D.SmoothingMode.AntiAlias;
 			gr.CompositingQuality = System.Drawing.Drawing2D.CompositingQuality.HighQuality;
 			gr.InterpolationMode = System.Drawing.Drawing2D.InterpolationMode.HighQualityBicubic;
-			gr.Clear(System.Drawing.Color.White);
+			//gr.Clear(System.Drawing.Color.White);
 			foreach (Edge e in edges)
 				e.Draw(gr);
 			foreach (Vertex v in vertexes)
@@ -53,10 +52,10 @@ namespace BeGraph
         }
 
         public static Graph operator +(Graph g, Edge e) {
-			if (!g.vertexes.Contains(e.GetFirst()))
-				g.vertexes.Add(e.GetFirst());
-			if (!g.vertexes.Contains(e.GetSecond()))
-				g.vertexes.Add(e.GetSecond());
+			if (!g.vertexes.Contains(e.First))
+				g.vertexes.Add(e.First);
+			if (!g.vertexes.Contains(e.Second))
+				g.vertexes.Add(e.Second);
 			if (!g.edges.Contains(e)) {
 				g.edges.Add(e);
 				g.OnGraphChanged(new System.EventArgs());
@@ -65,12 +64,12 @@ namespace BeGraph
         }
 
 		protected virtual void OnGraphChanged(System.EventArgs e) {
-			System.EventHandler handler = GraphChanged;
+			EventHandler handler = GraphChanged;
 			if (handler != null)
 				handler(this, e);
 		}
 
-		public event System.EventHandler GraphChanged;
+		public event EventHandler GraphChanged;
 
 	}
 }

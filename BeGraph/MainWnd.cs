@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Drawing;
 using System.IO;
 using System.Windows.Forms;
@@ -13,8 +12,8 @@ namespace BeGraph {
 		}
 
 		private void MainWnd_Load(object sender, EventArgs e) {
-			this.WindowState = FormWindowState.Maximized;
-			this.FormBorderStyle = FormBorderStyle.Sizable;
+			WindowState = FormWindowState.Maximized;
+			FormBorderStyle = FormBorderStyle.Sizable;
 		}
 
 		#region Toolbar events
@@ -36,9 +35,11 @@ namespace BeGraph {
 		private void NewToolbarItem_Click(object sender, EventArgs e) {
 			if (graphBox != null)
 				graphBox.Dispose();
+
 			graphBox = new GraphBox();
 			graphBox.Size = new Size(this.Size.Width - 40, this.Size.Height - 80);
-			this.Controls.Add(graphBox);
+
+			Controls.Add(graphBox);
 		}
 
 		private void OpenToolbarItem_Click(object sender, EventArgs e) {
