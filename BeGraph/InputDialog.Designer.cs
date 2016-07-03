@@ -1,6 +1,6 @@
 ﻿using System.Windows.Forms;
 
-namespace InputDialog {
+namespace BeGraph {
 	partial class InputDialog {
 		/// <summary>
 		/// Required designer variable.

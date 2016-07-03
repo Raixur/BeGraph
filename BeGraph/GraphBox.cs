@@ -2,114 +2,107 @@
 using System.Drawing;
 using System.Drawing.Drawing2D;
 using System.Windows.Forms;
+using BeGraph.GShape;
+using BeGraph.Visitor;
 
 namespace BeGraph {
 	/// <summary>
-	/// Represents a user control for displaying directed graph.
+	///     Represents a user control for displaying directed graph.
 	/// </summary>
-	class GraphBox : PictureBox {
-
-		private Graph g;
-		private Vertex last;
+	internal class GraphBox : PictureBox {
 		private Point currentPos;
 
-		private bool isMouseButtonLeftDown = false;
-		private bool isMouseButtonRightDown = false;
-
-		public Graph G {
-			get {
-				return g;
-			}
-
-			set {
-				g = value;
-			}
-		}
+		private bool isMouseButtonLeftDown;
+		private bool isMouseButtonRightDown;
+		private Vertex last;
 
 		public GraphBox() {
-			g = new Graph();
+			G = new Graph();
 
-			this.BackColor = System.Drawing.Color.White;
-			this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
-			this.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-			this.Location = new System.Drawing.Point(12, 28);
-			this.Name = "graphBox";
-			this.Size = new System.Drawing.Size(563, 421);
-			this.TabIndex = 3;
-			this.TabStop = false;
+			BackColor = Color.White;
+			BackgroundImageLayout = ImageLayout.None;
+			BorderStyle = BorderStyle.FixedSingle;
+			Location = new Point(12, 28);
+			Name = "graphBox";
+			Size = new Size(563, 421);
+			TabIndex = 3;
+			TabStop = false;
 
-			// Binding event handlers to events.
-			MouseDown += new MouseEventHandler(pb_MouseDown);
-			MouseUp += new MouseEventHandler(pb_MouseUp);
-			MouseDoubleClick += new MouseEventHandler(pb_DoubleClick);
-			MouseMove += new MouseEventHandler(pb_MouseMove);
-			g.GraphChanged += new EventHandler(g_GraphChanged);
+			MouseDown += pb_MouseDown;
+			MouseUp += pb_MouseUp;
+			MouseDoubleClick += pb_DoubleClick;
+			MouseMove += pb_MouseMove;
+			G.GraphChanged += g_GraphChanged;
 		}
 
+		public Graph G { get; set; }
+
+		public Shape TempShape { get; set; }
+
 		/// <summary>
-		/// Checking if there is enought place at the mouse 
-		/// cursor to create a vertex in GraphBox
+		///     Checking if there is enought place at the mouse
+		///     cursor to create a vertex in GraphBox
 		/// </summary>
 		/// <param name="cursor"></param>
 		/// <returns></returns>
 		private bool HaveSpace(Point cursor) {
-			int r = Vertex.r;
-			Point rbBorder = new Point(base.Width - r, base.Height - r);
-			if (!((cursor.X > r && cursor.X < rbBorder.X) && (cursor.Y > r && cursor.Y < rbBorder.Y)))
-				return false;
-			return true;
+			var r = Vertex.Radius;
+			var rbBorder = new Point(Width - r, Height - r);
+			return cursor.X > r && cursor.X < rbBorder.X && cursor.Y > r && cursor.Y < rbBorder.Y;
 		}
 
 		/// <summary>
-		/// Generating vertex at cursor point. Display input 
-		/// form which requires you to enter name of the vertex. 
+		///     Generating vertex at cursor point. Display input
+		///     form which requires you to enter name of the vertex.
 		/// </summary>
 		/// <param name="p">p is current position of the mouse cusror</param>
 		/// <returns>Returns generated vertex</returns>
 		private Vertex GenerateVert(Point p) {
 			if (HaveSpace(p)) {
-
 				//Display dialog which requires to enter name of vertex
-				InputDialog.InputDialog inputDialog = new InputDialog.InputDialog("Enter name of a vertex", "Vertex generation");
-				DialogResult dialogResult = inputDialog.ShowDialog(this);
+				var inputDialog = new InputDialog("Enter name of a vertex", "Vertex generation");
+				var dialogResult = inputDialog.ShowDialog(this);
 
 				if (dialogResult == DialogResult.OK) {
-					Vertex v = new Vertex(inputDialog.InputText, p);
+					var v = new Vertex(inputDialog.InputText, p);
 					return v;
 				}
 			}
 			// If there is not enough place to put a vertex displays error dialog
 			else {
-				MessageBox.Show("Invalid place to put a vertex!", "Error", MessageBoxButtons.OK);
+				MessageBox.Show(@"Invalid place to put a vertex!", @"Error", MessageBoxButtons.OK);
 			}
 			return null;
 		}
 
 		/// <summary>
-		/// Overriding the paint event for GraphBox
+		///     Overriding the paint event for GraphBox
 		/// </summary>
 		/// <param name="pe"></param>
 		protected override void OnPaint(PaintEventArgs pe) {
 			base.OnPaint(pe);
 
 			// Setting graphics quality to high
-			pe.Graphics.SmoothingMode = System.Drawing.Drawing2D.SmoothingMode.HighQuality;
-			pe.Graphics.InterpolationMode = System.Drawing.Drawing2D.InterpolationMode.High;
-			pe.Graphics.CompositingQuality = System.Drawing.Drawing2D.CompositingQuality.HighQuality;
+			pe.Graphics.SmoothingMode = SmoothingMode.HighQuality;
+			pe.Graphics.InterpolationMode = InterpolationMode.High;
+			pe.Graphics.CompositingQuality = CompositingQuality.HighQuality;
 
-			//Draws grapgh
-			g.Draw(pe.Graphics);
+			var drawer = new GDrawer(pe.Graphics);
+			G.Accept(drawer);
+			TempShape?.Accept(drawer);
 
 			//Draws a line from vertex to current position of mouse cursor
-			if(isMouseButtonLeftDown && last != null && last.Position != currentPos) {
-				using (Pen blackPen = new Pen(Color.Black, 2)) {
-					AdjustableArrowCap bigArrow = new AdjustableArrowCap(5, 5);
+			if (isMouseButtonLeftDown && last != null && last.Position != currentPos) {
+				using (var blackPen = new Pen(Color.Black, 2)) {
+					var bigArrow = new AdjustableArrowCap(5, 5);
 					blackPen.CustomEndCap = bigArrow;
-			
-					double c = Math.Sqrt(Math.Pow(currentPos.X - last.Position.X, 2) + Math.Pow(currentPos.Y - last.Position.Y, 2));
-					double sin = (currentPos.Y - last.Position.Y) / c;
-					double cos = (currentPos.X - last.Position.X) / c;
-					Point startPoint = new Point(last.Position.X + (int)(cos * Vertex.r), last.Position.Y + (int)(sin * Vertex.r));
+
+					var c = Math.Sqrt(Math.Pow(currentPos.X - last.Position.X, 2)
+					                  + Math.Pow(currentPos.Y - last.Position.Y, 2));
+					var sin = (currentPos.Y - last.Position.Y)/c;
+					var cos = (currentPos.X - last.Position.X)/c;
+					var startPoint = new Point(last.Position.X + (int) (cos*Vertex.Radius),
+						last.Position.Y + (int) (sin*Vertex.Radius));
 
 					pe.Graphics.DrawLine(blackPen, startPoint, currentPos);
 				}
@@ -117,7 +110,6 @@ namespace BeGraph {
 		}
 
 		#region Events
-
 
 		private void g_GraphChanged(object sender, EventArgs e) {
 			Invalidate();
@@ -128,14 +120,14 @@ namespace BeGraph {
 				case MouseButtons.Left:
 					if (me.Clicks == 1) {
 						isMouseButtonLeftDown = true;
-						last = g.VertAt(me.Location);
+						last = G.VertAt(me.Location);
 						currentPos = me.Location;
 					}
 					break;
 				case MouseButtons.Right:
 					if (me.Clicks == 1) {
 						isMouseButtonRightDown = true;
-						last = g.VertAt(me.Location);
+						last = G.VertAt(me.Location);
 					}
 					break;
 			}
@@ -159,10 +151,10 @@ namespace BeGraph {
 				case MouseButtons.Left:
 					if (me.Clicks == 1) {
 						isMouseButtonLeftDown = false;
-						Vertex tempSecond = g.VertAt(me.Location);
+						var tempSecond = G.VertAt(me.Location);
 						if (last != null && tempSecond != null) {
-							Edge e = new Edge(last, tempSecond);
-							g += e;
+							var e = new Edge(last, tempSecond);
+							G += e;
 						}
 						else {
 							Invalidate();
@@ -171,7 +163,7 @@ namespace BeGraph {
 					break;
 
 				case MouseButtons.Right:
-					if(me.Clicks == 1) {
+					if (me.Clicks == 1) {
 						isMouseButtonRightDown = false;
 					}
 					break;
@@ -179,18 +171,19 @@ namespace BeGraph {
 		}
 
 		/// <summary>
-		/// Creates a new vertex at the point of double click
+		///     Creates a new vertex at the point of double click
 		/// </summary>
 		/// <param name="sender"></param>
 		/// <param name="e"></param>
 		private void pb_DoubleClick(object sender, EventArgs e) {
-			MouseEventArgs me = (MouseEventArgs)e;
-			if (g.VertAt(me.Location) == null) { 
-				Vertex v = GenerateVert(me.Location);
+			var me = (MouseEventArgs) e;
+			if (G.VertAt(me.Location) == null) {
+				var v = GenerateVert(me.Location);
 				if (v != null)
-					g += v;
+					G += v;
 			}
 		}
+
 		#endregion
 	}
 }

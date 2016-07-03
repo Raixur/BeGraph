@@ -1,18 +1,13 @@
 ﻿using System.Windows.Forms;
 
-namespace InputDialog {
+namespace BeGraph {
 	public partial class InputDialog : Form {
-
-		public string InputText {
-			get {
-				return textBox.Text;
-			}
-		}
-
 		public InputDialog(string text, string caption) {
 			InitializeComponent();
-			this.label.Text = text;
-			this.Text = caption;
+			label.Text = text;
+			Text = caption;
 		}
+
+		public string InputText => textBox.Text;
 	}
 }
